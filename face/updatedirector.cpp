@@ -44,7 +44,9 @@ int Updater::Update( sf::Image *iFrame )
         c_Shapes.push_back( m_Shapes->blackCircle ( iGetAverage(iAverageFirstEyePosX), iGetAverage(iAverageFirstEyePosY), m_Detector->dEyeOneHeight ) );
         c_Shapes.push_back( m_Shapes->blackCircle ( iGetAverage(iAverageSecondEyePosX), iGetAverage(iAverageSecondEyePosY), m_Detector->dEyeTwoHeight ) );
         c_Shapes.push_back( m_Shapes->redCircle ( m_Detector->pSmilePossition.first, m_Detector->pSmilePossition.second, m_Detector->dSmileHeight ) );
-        logXYP ( m_Detector->pSmilePossition.first, m_Detector->pSmilePossition.second, m_Detector->dSmileHeight );
+        
+        /* Un Comment Logs If Needed */
+//        logXYP ( m_Detector->pSmilePossition.first, m_Detector->pSmilePossition.second, m_Detector->dSmileHeight );
 //        logXYP ( m_Detector->pEyeOnePosition.first, m_Detector->pEyeOnePosition.second, m_Detector->dEyeOneHeight );
 //        logXYP ( m_Detector->pEyeTwoPosition.first, m_Detector->pEyeTwoPosition.second, m_Detector->dEyeTwoHeight );
 
