@@ -20,6 +20,7 @@ class Updater
 {
 public:
     int Update ( sf::Image *iFrame );
+    
     std::vector<sf::CircleShape> c_Shapes;
 private:
     Detector *m_Detector = new Detector ( );

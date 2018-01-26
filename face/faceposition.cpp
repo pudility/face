@@ -43,22 +43,23 @@ int Detector::detectAndDraw( cv::Mat& img, cv::CascadeClassifier& cascade, cv::C
     cv::Mat gray;
     cv::Mat smallImg;
     
-    cvtColor( img, gray, cv::COLOR_BGR2GRAY ); // Convert to Gray Scale
+    cvtColor( img, gray, cv::COLOR_BGR2GRAY );
     double fx = 1 / scale;
     
-    // Resize the Grayscale Image
     resize( gray, smallImg, cv::Size(), fx, fx, cv::INTER_LINEAR );
     equalizeHist( smallImg, smallImg );
     
-    // Detect faces of different sizes using cascade classifier
-    cascade.detectMultiScale( smallImg, vrFaces, 1.1, 3, 0, cv::Size( 20, 20 ) );
+    cascade.detectMultiScale( smallImg, vrFaces, 1.1, 2, 0, cv::Size( 20, 20 ) );
     
     if (vrFaces.size() < 1)
         return 0;
     
     cv::Rect rFace = vrFaces[0];
-    nestedSmileCascade.detectMultiScale( smallImg( rFace ), vrSmiles, 3.0, 2, 0, cv::Size( 30, 30 ) );
-    nestedCascade.detectMultiScale( smallImg( rFace ), vrEyes, 3.0, 2, 0, cv::Size( 30, 30 ) );
+    
+    /* Smile not working */
+//    nestedSmileCascade.detectMultiScale( smallImg( rFace ), vrSmiles, 3.0, 2, 0, cv::Size( 30, 30 ) );
+    
+    nestedCascade.detectMultiScale( smallImg( rFace ), vrEyes, 2.0, 2, 0, cv::Size( 30, 30 ) );
     
     if ( vrEyes.size() > 1 )
     {
@@ -73,15 +74,17 @@ int Detector::detectAndDraw( cv::Mat& img, cv::CascadeClassifier& cascade, cv::C
         pEyeTwoPosition.second = rFace.y + vrEyes[1].y + (vrEyes[1].height * OFFSET);
     }
     
-    if (vrSmiles.size() > 0)
-    {
-        cv::Rect rSmile = vrSmiles[0];
-
-        dSmileWidth = rSmile.width * 2;
-        dSmileHeight = rSmile.height;
-        pSmilePossition.first = rFace.x - (rSmile.width / 2);
-        pSmilePossition.second = 2 * (rFace.y + rSmile.y + (rSmile.height * OFFSET));
-    }
+    /* Smile not working */
+//    if (vrSmiles.size() > 0)
+//    {
+//        cv::Rect rSmile = vrSmiles[0];
+//
+//        dSmileWidth = rSmile.width * 2;
+//        dSmileHeight = rSmile.height;
+//        pSmilePossition.first = rFace.x - (rSmile.width / 2);
+//        pSmilePossition.second = 2 * (rFace.y + rSmile.y + (rSmile.height * OFFSET));
+//    }
+    
     else
     {
         dSmileHeight = 0;

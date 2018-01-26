@@ -27,19 +27,19 @@ void App::run()
             if ( event.type == sf::Event::Closed )
                 m_RenderWindow.close( );
         
-        if ( m_Updater->Update( m_Frame ) == 1 ) {
+        if ( m_Updater->Update( m_Frame ) == 1 )
+        {
             sf::Texture tFrameTexture;
             tFrameTexture.loadFromImage( *m_Frame );
             m_Sprite.setTexture( tFrameTexture );
             m_RenderWindow.clear ( );
+            
             for ( auto shape: m_Updater->c_Shapes )
             {
                 sf::View vViewTMP ( sf::FloatRect( 0, 0, 800, 800 ) );
                 m_RenderWindow.setView ( vViewTMP );
                 m_RenderWindow.draw( shape );
             }
-            
-//            m_RenderWindow.draw( m_Updater->c_Shapes [0] );
             
             m_RenderWindow.setActive( );
             m_RenderWindow.display( );
